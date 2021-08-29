@@ -1,0 +1,40 @@
+html {
+    position: relative;
+}
+
+body {
+    margin-bottom: 120px;
+}
+
+.p-5 img {
+    width: 200px;
+}
+
+section {
+    min-height: 600px;
+}
+
+hr {
+    width: 250px;
+    border-top: 4px solid;
+}
+
+.contact {
+    background-color: #eee;
+    padding-top: 30px;
+    min-height: 800px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #333;
+    padding-top: 30px;
+}
+
+footer p {
+    color: #aaa ;
+    font-size: 1em;
+}
