@@ -13,7 +13,7 @@ google.charts.load('current', {packages: ['table']});
 var visualization;
 
 function drawVisualization() {
-    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1DbGEGbPlwSlNE62GkGlj0tZVy-c_tVc_Q5DIvWWOwik/gviz/tq?output=html&usp=sharing');
+    var query = new google.visualization.Query('https://spreadsheets.google.com/tq?key=1DbGEGbPlwSlNE62GkGlj0tZVy-c_tVc_Q5DIvWWOwik&output=html&usp=sharing');
     query.setQuery('SELECT A, B, C, D label A "Duration", B "Song", C "Requested By", D "URL"');
     query.send(handleQueryResponse);
 }
