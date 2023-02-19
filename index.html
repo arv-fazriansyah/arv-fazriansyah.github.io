@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta content="ie=edge" http-equiv="x-ua-compatible">
-  <title>{{STEAMER}} Playlist</title>
-  <meta content="Online song request list for {{STREAMER}}" name="description">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="favicon.ico" rel="shortcut icon">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-  <link href="css/normalize.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
-
-<body id="background">
-  <div id="box">
-    <h1>arv</h1>
-    <script src="https://raw.githubusercontent.com/arv-fazriansyah/arv-fazriansyah.github.io/main/js/google-sheets-html.js" type="text/javascript"></script>
-    <div id="table">
-    </div>
-    <p class="small">arb</p>
-  </div>
+<!DOCTYPE html><html><head><title>Share your Google Sheets</title></head>
+<body>
+    <table class="output"></table>
+    <script>
+const base = 'https://docs.google.com/spreadsheets/d/1DbGEGbPlwSlNE62GkGlj0tZVy-c_tVc_Q5DIvWWOwik/gviz/tq?';
+const output = document.querySelector('.output');
+const query = encodeURIComponent('Select A,B,C where C > 3 limit 20');
+const url = base + '&tq=' + query;
+    fetch(url)
+    .then(res => res.text())
+    .then(rep =>{
+        const data = JSON.parse(rep.substr(47).slice(0,-2));
+        const row = document.createElement('tr');
+        output.append(row);
+        data.table.cols.forEach((heading)=>{
+            const cell = document.createElement('td');
+            cell.textContent = heading.label;
+            row.append(cell);
+        })
+        data.table.rows.forEach((main)=>{
+            const container = document.createElement('tr');
+            output.append(container);
+            main.c.forEach((ele)=>{
+                const cell = document.createElement('td');
+                cell.textContent = ele.v;
+                container.append(cell);
+            })
+        })
+    })
+    </script>
 </body>
 </html>
