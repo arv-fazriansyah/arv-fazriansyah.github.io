@@ -64,48 +64,41 @@
 <body>
 
 	<div class="container">
-		<div class="chat-container">
+		<div class="chat-container" id="chat-container">
 			<div class="message bot">
 				<p>Hello, how can I help you today?</p>
 			</div>
 		</div>
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Type your message here...">
+			<input type="text" class="form-control" placeholder="Type your message here..." id="input-message">
 			<button class="btn btn-primary" onclick="sendMessage()">Send</button>
 		</div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
-	function sendMessage() {
-		// Ambil input pengguna
-		var userMessage = document.querySelector(".input-group input").value;
-		
-		// Tambahkan pesan pengguna ke chat container
-		var userMessageHTML = '<div class="message user"><p>' + userMessage + '</p></div>';
-		document.querySelector(".chat-container").innerHTML += userMessageHTML;
-		
-		// Kirim pesan pengguna ke Worker Cloudflare
-		// Ganti URL pada baris berikut dengan URL dari endpoint Worker Cloudflare Anda
-		fetch("https://arv.fzrnsyh.workers.dev/send-message", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				message: userMessage
-			})
-		})
-		.then(response => response.json())
-		.then(data => {
-			// Tambahkan pesan balasan dari Worker Cloudflare ke chat container
-			var botMessageHTML = '<div class="message bot"><p>' + data.message + '</p></div>';
-			document.querySelector(".chat-container").innerHTML += botMessageHTML;
-		});
-		
-		// Kosongkan input pengguna
-		document.querySelector(".input-group input").value = "";
-	}
+	<script>
+		async function sendMessage() {
+			const message = document.getElementById("input-message").value;
+			const response = await fetch("<https://auto.fzrnsyh.workers.dev/", {
+				method: "POST",
+				body: JSON.stringify({ message }),
+				headers: { "Content-Type": "application/json" }
+			});
+			const data = await response.json();
+			const messageContainer = document.getElementById("chat-container");
+			const messageElement = document.createElement("div");
+			messageElement.classList.add("message", "user");
+			messageElement.innerHTML = `${message}`;
+			messageContainer.appendChild(messageElement);
+					const botMessageElement = document.createElement("div");
+			botMessageElement.classList.add("message", "bot");
+			botMessageElement.innerHTML = `
+				<p>${data.message}</p>
+			`;
+			messageContainer.appendChild(botMessageElement);
+
+			document.getElementById("input-message").value = "";
+			}
 </script>
 </body>
 </html>
