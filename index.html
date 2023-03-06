@@ -79,7 +79,7 @@
 	<script>
 		async function sendMessage() {
 			const message = document.getElementById("input-message").value;
-			const response = await fetch("<https://auto.fzrnsyh.workers.dev/", {
+			const response = await fetch("https://auto.fzrnsyh.workers.dev", {
 				method: "POST",
 				body: JSON.stringify({ message }),
 				headers: { "Content-Type": "application/json" }
